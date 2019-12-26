@@ -1,0 +1,39 @@
+{
+  organization(login: "mvrck-inc") {
+    name
+    repositories(last: 10) {
+      nodes {
+        name
+        issues(last: 100) {
+          nodes {
+            url
+            title
+            number
+            labels(first: 10) {
+              nodes {
+                name
+              }
+            }
+            author {
+              login
+            }
+            assignees(first: 100) {
+              nodes {
+                login
+              }
+            }
+            # timelineItems(itemTypes: [REFERENCED_EVENT]){
+            #   nodes {
+            #     ... on ReferencedEvent {
+            #       commitRepository {
+            #         name
+            #       }
+            #     }
+            #   }
+            # }
+          }
+        }
+      }
+    }
+  }
+}

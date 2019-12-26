@@ -1,68 +1,69 @@
 <template>
   <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        gaanthub
-      </h1>
-      <h2 class="subtitle">
-        My good Nuxt.js project
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
+    <p><input v-model="token" type="text" name="GITHUB_TOKEN" /></p>
+    <section v-if="data.organization">
+      <span>{{ data.organization.name }}</span>
+      <ul>
+        <li
+          v-for="repo in data.organization.repositories.nodes"
+          :key="repo.name"
         >
-          GitHub
-        </a>
-      </div>
-    </div>
+          <span>{{ repo.name }}</span>
+          <ul v-for="issue in repo.issues.nodes" :key="issue.name">
+            <li>
+              <span>{{ issue.title }}</span>
+              <span>#{{ issue.number }}</span>
+            </li>
+            <i>@{{ issue.author.login }}</i>
+            <i v-for="user in issue.assignees.nodes" :key="user.login" v-if="">
+              @{{ user.login }}
+            </i>
+            <i v-for="label in issue.labels.nodes" :key="label.name">
+              <span>{{ label.name }}</span>
+            </i>
+          </ul>
+        </li>
+      </ul>
+    </section>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import query from '~/schema/graphql/issues.gql'
 
 export default {
-  components: {
-    Logo
+  data() {
+    return {
+      token: '',
+      data: {}
+    }
+  },
+  watch: {
+    token() {
+      this.load()
+    }
+  },
+  mounted() {
+    this.load()
+  },
+  methods: {
+    async load() {
+      if (!this.$data.token) {
+        const res = await this.$axios.get('/data.json')
+        this.$data.data = res.data.data
+      } else {
+        const res = await this.$axios.post(
+          'https://api.github.com/graphql',
+          { query },
+          {
+            headers: {
+              Authorization: 'bearer ' + this.$data.token
+            }
+          }
+        )
+        this.$data.data = res.data.data
+      }
+    }
   }
 }
 </script>
-
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>

@@ -1,3 +1,5 @@
+import webpack from 'webpack'
+
 module.exports = {
   mode: 'universal',
   /*
@@ -58,6 +60,17 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) {
+      config.module.rules.push({
+        test: /\.(gql)$/i,
+        exclude: /node_modules/,
+        loader: 'raw-loader'
+      })
+      config.module.rules.push(
+        new webpack.DefinePlugin({
+          GITHUB_TOKEN: JSON.stringify(process.env.GITHUB_TOKEN)
+        })
+      )
+    }
   }
 }
