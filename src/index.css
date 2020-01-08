@@ -1,0 +1,33 @@
+html,
+body,
+body > main {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: sans-serif;
+}
+body > main {
+  position: relative;
+  box-sizing: border-box;
+  padding: 40px;
+  outline: 4px solid #000;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+a {
+  text-decoration: none;
+}
+th,
+td {
+  padding: 0;
+  text-align: left;
+  white-space: nowrap;
+}
+th {
+  outline: 1px solid #fdd;
+}
+td {
+  outline: 1px solid #ddd;
+}
