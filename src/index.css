@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+}
+table {
+  border-spacing: 0;
+}
+th {
+  text-align: left;
+}
+th,
+td {
+  padding: 0;
+}
