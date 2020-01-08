@@ -1,0 +1,21 @@
+---
+version: "3"
+services:
+  app:
+    image: "node:14"
+    working_dir: /app
+    volumes:
+      - ".:/app"
+    environment:
+      GITHUB_TOKEN: "${GITHUB_TOKEN}"
+    ports:
+      - "3000:3000"
+    command: npm start
+  gen:
+    image: "node:14"
+    working_dir: /app
+    volumes:
+      - ".:/app"
+    environment:
+      GITHUB_TOKEN: "${GITHUB_TOKEN}"
+    command: npm run gen -- --watch
