@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { GetRateLimit } from "../types/GetRateLimit";
 
 export const RateLimit: React.FC = function ({ children }) {
-  const { data } = useQuery<GetRateLimit>(gql`
+  const { data, loading, error } = useQuery<GetRateLimit>(gql`
     query GetRateLimit {
       rateLimit {
         limit
@@ -14,7 +14,9 @@ export const RateLimit: React.FC = function ({ children }) {
       }
     }
   `);
-  if (!data || !data.rateLimit) return <></>;
+  if (loading) return <>Loading...</>;
+  if (error) throw error;
+  if (!data || !data.rateLimit) throw new Error();
   console.debug(`rateLimit.remaining: ${data.rateLimit.remaining}`);
   console.debug(`rateLimit.resetAt: ${new Date(data.rateLimit.resetAt)}`);
   let message: React.ReactNode;

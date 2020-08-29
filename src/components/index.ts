@@ -1,10 +1,10 @@
 import GetMilestones from "../types/GetMilestones";
+import { GithubItemFragmentIssue } from "../types/GithubItemFragmentIssue";
 import { GithubItemFragmentOrganization } from "../types/GithubItemFragmentOrganization";
+import { GithubItemFragmentPullRequest } from "../types/GithubItemFragmentPullRequest";
 import { GithubItemFragmentRepository } from "../types/GithubItemFragmentRepository";
+import { GithubItemFragmentUser } from "../types/GithubItemFragmentUser";
 import UserPile from "../types/UserPile";
-import { GithubItemFragmentIssue } from "./../types/GithubItemFragmentIssue.d";
-import { GithubItemFragmentPullRequest } from "./../types/GithubItemFragmentPullRequest";
-import { GithubItemFragmentUser } from "./../types/GithubItemFragmentUser";
 
 export type GithubFragment =
   | GithubItemFragmentOrganization
@@ -23,7 +23,7 @@ export interface GithubConnectionFragment<T = any> {
   pageInfo: {
     hasNextPage: boolean;
   };
-  nodes: ReadonlyArray<T> | null;
+  nodes: ReadonlyArray<T | null> | null;
 }
 
 export interface HasNextFragment {

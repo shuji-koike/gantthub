@@ -10,7 +10,11 @@ import {
   GetRepositoryPileVariables,
 } from "../types/GetRepositoryPile";
 import { GithubItemFragmentRepository } from "../types/GithubItemFragmentRepository";
-import { UserPile } from "../types/UserPile";
+import {
+  UserPile,
+  UserPile_pullRequests_nodes,
+  UserPile_issues_nodes,
+} from "../types/UserPile";
 import { GithubItem, GithubItemFragment } from "./GithubItem";
 import { PagerMore, PagerUtil } from "./Pager";
 
@@ -34,6 +38,10 @@ export const RepositoryPile: React.FC = function () {
           login
         }
         collaborators(first: $limit, after: $after) {
+          totalCount
+          pageInfo {
+            hasNextPage
+          }
           nodes {
             ...UserPile
           }
@@ -60,6 +68,7 @@ export const RepositoryPile: React.FC = function () {
           <Pile data={e!}></Pile>
         </React.Fragment>
       ))}
+      <PagerMore frag={data.repository?.collaborators} />
     </section>
   );
 };
@@ -139,27 +148,30 @@ export const Pile: React.FC<{ data: UserPile }> = function ({ data }) {
     name?: string;
     login?: string;
   }>();
-  function getRepoLabel(repo: GithubItemFragmentRepository) {
+  function getRepoLabel(repo?: GithubItemFragmentRepository) {
+    if (!repo) return "";
     return [
       (owner || login) !== repo.owner.login ? repo.owner.login + "/" : "",
       name !== repo.name ? repo.name : "",
     ].join("");
   }
+  const frag = PagerUtil.reduce<
+    UserPile_pullRequests_nodes | UserPile_issues_nodes
+  >(data.issues, data.pullRequests);
   return (
     <ul>
-      {[...data.issues.nodes!, ...data.pullRequests.nodes!].map(e => (
+      {frag.nodes?.map(e => (
         <li key={e?.id}>
           <GithubItem
-            frag={e!}
-            label={getRepoLabel(e?.repository!) + `#${e?.number}`}>
-            {e?.title}
+            frag={e}
+            label={getRepoLabel(e?.repository) + `#${e?.number}`}>
+            <span>{e?.title}</span>
           </GithubItem>
         </li>
       ))}
-      {(data.issues.pageInfo.hasNextPage ||
-        data.pullRequests.pageInfo.hasNextPage) && (
+      {frag.pageInfo.hasNextPage && (
         <li>
-          <PagerMore frag={PagerUtil.reduce(data.issues, data.pullRequests)} />
+          <PagerMore frag={frag} />
         </li>
       )}
     </ul>

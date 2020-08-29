@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { UserContext, useAuth } from "../firebase";
 import { Config } from "./Config";
 import { Gantt } from "./Gantt";
 import { GithubProvider } from "./GithubProvider";
@@ -10,16 +11,23 @@ import { RateLimit } from "./RateLimit";
 
 export const App: React.FC = () => {
   return (
-    <GithubProvider>
-      <RateLimit>
-        <BrowserRouter>
-          <Layout>
-            <Routes />
-          </Layout>
-        </BrowserRouter>
-      </RateLimit>
-    </GithubProvider>
+    <BrowserRouter>
+      <GithubProvider fallback={<Config />}>
+        <RateLimit>
+          <ContextProvider>
+            <Layout>
+              <Routes />
+            </Layout>
+          </ContextProvider>
+        </RateLimit>
+      </GithubProvider>
+    </BrowserRouter>
   );
+};
+
+const ContextProvider: React.FC = ({ children }) => {
+  const { user } = useAuth();
+  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
 
 export const Routes: React.FC = () => (

@@ -8,29 +8,30 @@ import {
 import { PossibleTypesMap } from "@apollo/client/cache/inmemory/policies";
 import React, { useContext, useState, useEffect } from "react";
 import { GetSchema } from "../types/GetSchema";
-import { Config } from "./Config";
 
 const GithubContext = React.createContext({
   endpoint: "https://api.github.com/graphql",
   token: localStorage.getItem("GITHUB_TOKEN"),
 });
 
-export const GithubProvider: React.FC = function ({ children }) {
+export const GithubProvider: React.FC<{
+  fallback: React.ReactNode;
+}> = function ({ fallback, children }) {
   const github = useContext(GithubContext);
   return (
     <GithubContext.Provider value={github}>
-      <GithubAuthProvider>
-        <GithubSchemaProvider>
-          <>{children}</>
-        </GithubSchemaProvider>
+      <GithubAuthProvider fallback={fallback}>
+        <GithubSchemaProvider>{children}</GithubSchemaProvider>
       </GithubAuthProvider>
     </GithubContext.Provider>
   );
 };
 
-export const GithubAuthProvider: React.FC = function ({ children }) {
+export const GithubAuthProvider: React.FC<{
+  fallback: React.ReactNode;
+}> = function ({ fallback, children }) {
   const github = useContext(GithubContext);
-  return github.token ? <>{children}</> : <Config />;
+  return <>{github.token ? children : fallback}</>;
 };
 
 export const GithubSchemaProvider: React.FC = function ({ children }) {

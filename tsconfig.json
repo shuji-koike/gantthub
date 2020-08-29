@@ -8,6 +8,7 @@
     "isolatedModules": true,
     "lib": ["esnext", "dom", "dom.iterable"],
     "allowJs": true,
+    "checkJs": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,

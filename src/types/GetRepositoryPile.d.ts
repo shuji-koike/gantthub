@@ -15,6 +15,14 @@ export interface GetRepositoryPile_repository_owner {
   readonly login: string;
 }
 
+export interface GetRepositoryPile_repository_collaborators_pageInfo {
+  readonly __typename: "PageInfo";
+  /**
+   * When paginating forwards, are there more items?
+   */
+  readonly hasNextPage: boolean;
+}
+
 export interface GetRepositoryPile_repository_collaborators_nodes_issues_pageInfo {
   readonly __typename: "PageInfo";
   /**
@@ -258,6 +266,14 @@ export interface GetRepositoryPile_repository_collaborators_nodes {
 
 export interface GetRepositoryPile_repository_collaborators {
   readonly __typename: "RepositoryCollaboratorConnection";
+  /**
+   * Identifies the total count of items in the connection.
+   */
+  readonly totalCount: number;
+  /**
+   * Information to aid in pagination.
+   */
+  readonly pageInfo: GetRepositoryPile_repository_collaborators_pageInfo;
   /**
    * A list of nodes.
    */

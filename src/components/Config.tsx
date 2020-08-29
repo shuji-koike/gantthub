@@ -1,26 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
+import { Input } from "./Input";
 
 export const Config: React.FC = function () {
   return (
     <>
-      <LocalStorageInput name="GITHUB_TOKEN" />
-      <LocalStorageInput name="ZENHUB_TOKEN" />
+      <Input type="password" name="GITHUB_TOKEN" store />
     </>
-  );
-};
-
-const LocalStorageInput: React.FC<{ name: string }> = function ({ name }) {
-  const [value, setValue] = useState(localStorage.getItem(name));
-  return (
-    <input
-      type="text"
-      value={value || ""}
-      name={name}
-      placeholder={name}
-      onChange={e => {
-        localStorage.setItem(name, e.target.value);
-        setValue(e.target.value);
-      }}
-    />
   );
 };

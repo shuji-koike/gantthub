@@ -29,7 +29,7 @@ export const Home: React.FC = () => {
             )
         )}
         <li>
-          <GithubItem frag={data.viewer} label="pr" />
+          <GithubItem frag={data.viewer} label="Pull requests" />
           <ul>
             {data.viewer.pullRequests.nodes?.map(e => (
               <li key={e?.id}>
@@ -40,7 +40,7 @@ export const Home: React.FC = () => {
               <PagerMore frag={data.viewer.pullRequests} />
             </li>
           </ul>
-          <GithubItem frag={data.viewer} label="issues" />
+          <GithubItem frag={data.viewer} label="Issues" />
           <ul>
             {data.viewer.issues.nodes?.map(e => (
               <li key={e?.id}>

@@ -6,7 +6,7 @@
     "build": "react-scripts build",
     "lint:prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json}'",
     "lint:eslint": "eslint . --ext js --ext ts --ext tsx --fix",
-    "apollo:codegen": "apollo client:codegen --target typescript --tsFileExtension d.ts --useReadOnlyTypes --outputFlat src/types --watch"
+    "gen": "apollo client:codegen --target typescript --tsFileExtension d.ts --useReadOnlyTypes --outputFlat src/types --watch"
   },
   "dependencies": {
     "@apollo/client": "^3.1.4",
@@ -17,7 +17,6 @@
     "firebase": "^7.19.1",
     "graphql": "^15.3.0",
     "graphql-tools": "^6.1.0",
-    "ink": "^3.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",

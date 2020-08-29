@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import dayjs from "dayjs";
-import React, { useEffect, useRef, useContext } from "react";
+import React, { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { GetMilestones } from "../types/GetMilestones";
@@ -8,20 +8,13 @@ import { GanttHeader } from "./GanttHeader";
 import { GithubItem } from "./GithubItem";
 import { GithubItemFragment } from "./GithubItem";
 import { ScrollBox } from "./ScrollBox";
-import { ZenhubContext } from "./ZenhubProvider";
 
 export const Gantt: React.FC = function () {
   const ref = useRef<HTMLTableElement>(null);
-  const zenhub = useContext(ZenhubContext);
   const params = useParams<{ owner: string; name: string }>();
   const { data, loading, error } = useQuery<GetMilestones>(query, {
     variables: params,
   });
-  useEffect(() => {
-    if (data?.repository?.databaseId) {
-      zenhub.fetch(`/p1/repositories/${data?.repository?.databaseId}/epics`);
-    }
-  }, [data, zenhub]);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error.message}</p>;
   if (
