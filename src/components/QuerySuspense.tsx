@@ -13,7 +13,7 @@ export const QuerySuspense: React.FC<QuerySuspenseProps> = ({
   children,
 }) => {
   if (loading) return <p>Loading...</p>;
-  error?.graphQLErrors.forEach(e => toast.error(e.message));
+  if (error) toast.error(error.message);
   return (
     <>
       {children}

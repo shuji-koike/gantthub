@@ -12,7 +12,7 @@ import {
   QuestionIcon,
 } from "@primer/octicons-react";
 import React from "react";
-import styled from "styled-components";
+import styled, { CSSProperties } from "styled-components";
 import { GithubFragment } from "../types";
 
 // https://primer.style/octicons/
@@ -20,13 +20,10 @@ import { GithubFragment } from "../types";
 export const GithubIcon: React.FC<{
   frag: GithubFragment | null;
 }> = ({ frag }) =>
-  frag && (
-    <StyledGithubIcon style={{ color: color(frag) }}>
-      {renderIcon(icon(frag))}
-    </StyledGithubIcon>
-  );
+  frag && <StyledGithubIcon as={icon(frag)} color={color(frag)} />;
 
-const StyledGithubIcon = styled.span`
+const StyledGithubIcon = styled.svg<{ color: CSSProperties["color"] }>`
+  color: ${({ color }) => color};
   & + * {
     margin-left: 0.25rem;
   }
@@ -51,10 +48,6 @@ function icon(frag: GithubFragment) {
     default:
       return QuestionIcon;
   }
-}
-
-function renderIcon(Icon: React.FC) {
-  return <Icon />;
 }
 
 function color(frag: GithubFragment, defaultClolor: string = "#000") {
