@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { GithubItemFragmentRepository } from "../types/GithubItemFragmentRepository";
