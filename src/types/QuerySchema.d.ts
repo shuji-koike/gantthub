@@ -6,29 +6,29 @@
 import { __TypeKind } from "./globalTypes";
 
 // ====================================================
-// GraphQL query operation: GetSchema
+// GraphQL query operation: QuerySchema
 // ====================================================
 
-export interface GetSchema___schema_types_possibleTypes {
+export interface QuerySchema___schema_types_possibleTypes {
   readonly __typename: "__Type";
   readonly name: string | null;
 }
 
-export interface GetSchema___schema_types {
+export interface QuerySchema___schema_types {
   readonly __typename: "__Type";
   readonly kind: __TypeKind;
   readonly name: string | null;
-  readonly possibleTypes: ReadonlyArray<GetSchema___schema_types_possibleTypes> | null;
+  readonly possibleTypes: ReadonlyArray<QuerySchema___schema_types_possibleTypes> | null;
 }
 
-export interface GetSchema___schema {
+export interface QuerySchema___schema {
   readonly __typename: "__Schema";
   /**
    * A list of all types supported by this server.
    */
-  readonly types: ReadonlyArray<GetSchema___schema_types>;
+  readonly types: ReadonlyArray<QuerySchema___schema_types>;
 }
 
-export interface GetSchema {
-  readonly __schema: GetSchema___schema;
+export interface QuerySchema {
+  readonly __schema: QuerySchema___schema;
 }

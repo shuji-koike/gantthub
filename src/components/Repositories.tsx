@@ -5,11 +5,12 @@ import { GithubItem, GithubItemFragment } from "./GithubItem";
 import { PagerMore } from "./Pager";
 
 export const Repositories: React.FC<{
-  frag: RepositoriesFragmentConnection;
+  frag: RepositoriesFragmentConnection | null | undefined;
 }> = function ({ frag }) {
+  if (!frag) return <>Loading...</>;
   return (
     <ul>
-      {frag?.nodes?.map(e => (
+      {frag.nodes?.map(e => (
         <li key={e?.id}>
           <GithubItem frag={e} link={`/${e?.nameWithOwner}/gantt`} />
         </li>

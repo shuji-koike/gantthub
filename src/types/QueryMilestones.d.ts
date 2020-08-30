@@ -4,10 +4,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetMilestones
+// GraphQL query operation: QueryMilestones
 // ====================================================
 
-export interface GetMilestones_repository_owner {
+export interface QueryMilestones_repository_owner {
   readonly __typename: "Organization" | "User";
   /**
    * The username used to login.
@@ -15,7 +15,7 @@ export interface GetMilestones_repository_owner {
   readonly login: string;
 }
 
-export interface GetMilestones_repository_milestones_nodes_issues_nodes_assignees_nodes {
+export interface QueryMilestones_repository_milestones_nodes_issues_nodes_assignees_nodes {
   readonly __typename: "User";
   /**
    * A URL pointing to the user's public avatar.
@@ -27,15 +27,15 @@ export interface GetMilestones_repository_milestones_nodes_issues_nodes_assignee
   readonly login: string;
 }
 
-export interface GetMilestones_repository_milestones_nodes_issues_nodes_assignees {
+export interface QueryMilestones_repository_milestones_nodes_issues_nodes_assignees {
   readonly __typename: "UserConnection";
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(GetMilestones_repository_milestones_nodes_issues_nodes_assignees_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(QueryMilestones_repository_milestones_nodes_issues_nodes_assignees_nodes | null)> | null;
 }
 
-export interface GetMilestones_repository_milestones_nodes_issues_nodes_labels_nodes {
+export interface QueryMilestones_repository_milestones_nodes_issues_nodes_labels_nodes {
   readonly __typename: "Label";
   /**
    * Identifies the label name.
@@ -47,15 +47,15 @@ export interface GetMilestones_repository_milestones_nodes_issues_nodes_labels_n
   readonly color: string;
 }
 
-export interface GetMilestones_repository_milestones_nodes_issues_nodes_labels {
+export interface QueryMilestones_repository_milestones_nodes_issues_nodes_labels {
   readonly __typename: "LabelConnection";
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(GetMilestones_repository_milestones_nodes_issues_nodes_labels_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(QueryMilestones_repository_milestones_nodes_issues_nodes_labels_nodes | null)> | null;
 }
 
-export interface GetMilestones_repository_milestones_nodes_issues_nodes {
+export interface QueryMilestones_repository_milestones_nodes_issues_nodes {
   readonly __typename: "Issue";
   readonly id: string;
   /**
@@ -89,22 +89,22 @@ export interface GetMilestones_repository_milestones_nodes_issues_nodes {
   /**
    * A list of Users assigned to this object.
    */
-  readonly assignees: GetMilestones_repository_milestones_nodes_issues_nodes_assignees;
+  readonly assignees: QueryMilestones_repository_milestones_nodes_issues_nodes_assignees;
   /**
    * A list of labels associated with the object.
    */
-  readonly labels: GetMilestones_repository_milestones_nodes_issues_nodes_labels | null;
+  readonly labels: QueryMilestones_repository_milestones_nodes_issues_nodes_labels | null;
 }
 
-export interface GetMilestones_repository_milestones_nodes_issues {
+export interface QueryMilestones_repository_milestones_nodes_issues {
   readonly __typename: "IssueConnection";
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(GetMilestones_repository_milestones_nodes_issues_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(QueryMilestones_repository_milestones_nodes_issues_nodes | null)> | null;
 }
 
-export interface GetMilestones_repository_milestones_nodes_pullRequests_nodes_assignees_nodes {
+export interface QueryMilestones_repository_milestones_nodes_pullRequests_nodes_assignees_nodes {
   readonly __typename: "User";
   /**
    * A URL pointing to the user's public avatar.
@@ -116,15 +116,15 @@ export interface GetMilestones_repository_milestones_nodes_pullRequests_nodes_as
   readonly login: string;
 }
 
-export interface GetMilestones_repository_milestones_nodes_pullRequests_nodes_assignees {
+export interface QueryMilestones_repository_milestones_nodes_pullRequests_nodes_assignees {
   readonly __typename: "UserConnection";
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(GetMilestones_repository_milestones_nodes_pullRequests_nodes_assignees_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(QueryMilestones_repository_milestones_nodes_pullRequests_nodes_assignees_nodes | null)> | null;
 }
 
-export interface GetMilestones_repository_milestones_nodes_pullRequests_nodes_labels_nodes {
+export interface QueryMilestones_repository_milestones_nodes_pullRequests_nodes_labels_nodes {
   readonly __typename: "Label";
   /**
    * Identifies the label name.
@@ -136,15 +136,15 @@ export interface GetMilestones_repository_milestones_nodes_pullRequests_nodes_la
   readonly color: string;
 }
 
-export interface GetMilestones_repository_milestones_nodes_pullRequests_nodes_labels {
+export interface QueryMilestones_repository_milestones_nodes_pullRequests_nodes_labels {
   readonly __typename: "LabelConnection";
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(GetMilestones_repository_milestones_nodes_pullRequests_nodes_labels_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(QueryMilestones_repository_milestones_nodes_pullRequests_nodes_labels_nodes | null)> | null;
 }
 
-export interface GetMilestones_repository_milestones_nodes_pullRequests_nodes {
+export interface QueryMilestones_repository_milestones_nodes_pullRequests_nodes {
   readonly __typename: "PullRequest";
   readonly id: string;
   /**
@@ -182,22 +182,22 @@ export interface GetMilestones_repository_milestones_nodes_pullRequests_nodes {
   /**
    * A list of Users assigned to this object.
    */
-  readonly assignees: GetMilestones_repository_milestones_nodes_pullRequests_nodes_assignees;
+  readonly assignees: QueryMilestones_repository_milestones_nodes_pullRequests_nodes_assignees;
   /**
    * A list of labels associated with the object.
    */
-  readonly labels: GetMilestones_repository_milestones_nodes_pullRequests_nodes_labels | null;
+  readonly labels: QueryMilestones_repository_milestones_nodes_pullRequests_nodes_labels | null;
 }
 
-export interface GetMilestones_repository_milestones_nodes_pullRequests {
+export interface QueryMilestones_repository_milestones_nodes_pullRequests {
   readonly __typename: "PullRequestConnection";
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(GetMilestones_repository_milestones_nodes_pullRequests_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(QueryMilestones_repository_milestones_nodes_pullRequests_nodes | null)> | null;
 }
 
-export interface GetMilestones_repository_milestones_nodes {
+export interface QueryMilestones_repository_milestones_nodes {
   readonly __typename: "Milestone";
   readonly id: string;
   /**
@@ -223,22 +223,22 @@ export interface GetMilestones_repository_milestones_nodes {
   /**
    * A list of issues associated with the milestone.
    */
-  readonly issues: GetMilestones_repository_milestones_nodes_issues;
+  readonly issues: QueryMilestones_repository_milestones_nodes_issues;
   /**
    * A list of pull requests associated with the milestone.
    */
-  readonly pullRequests: GetMilestones_repository_milestones_nodes_pullRequests;
+  readonly pullRequests: QueryMilestones_repository_milestones_nodes_pullRequests;
 }
 
-export interface GetMilestones_repository_milestones {
+export interface QueryMilestones_repository_milestones {
   readonly __typename: "MilestoneConnection";
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(GetMilestones_repository_milestones_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(QueryMilestones_repository_milestones_nodes | null)> | null;
 }
 
-export interface GetMilestones_repository {
+export interface QueryMilestones_repository {
   readonly __typename: "Repository";
   /**
    * Identifies the primary key from the database.
@@ -272,21 +272,21 @@ export interface GetMilestones_repository {
   /**
    * The User owner of the repository.
    */
-  readonly owner: GetMilestones_repository_owner;
+  readonly owner: QueryMilestones_repository_owner;
   /**
    * A list of milestones associated with the repository.
    */
-  readonly milestones: GetMilestones_repository_milestones | null;
+  readonly milestones: QueryMilestones_repository_milestones | null;
 }
 
-export interface GetMilestones {
+export interface QueryMilestones {
   /**
    * Lookup a given repository by the owner and repository name.
    */
-  readonly repository: GetMilestones_repository | null;
+  readonly repository: QueryMilestones_repository | null;
 }
 
-export interface GetMilestonesVariables {
+export interface QueryMilestonesVariables {
   readonly owner: string;
   readonly name: string;
   readonly first?: number | null;

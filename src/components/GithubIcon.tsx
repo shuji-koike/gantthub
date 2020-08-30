@@ -13,7 +13,7 @@ import {
 } from "@primer/octicons-react";
 import React from "react";
 import styled from "styled-components";
-import { GithubFragment } from ".";
+import { GithubFragment } from "../types";
 
 // https://primer.style/octicons/
 

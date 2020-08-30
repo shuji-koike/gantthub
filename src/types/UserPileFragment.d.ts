@@ -4,10 +4,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: UserPile
+// GraphQL fragment: UserPileFragment
 // ====================================================
 
-export interface UserPile_issues_pageInfo {
+export interface UserPileFragment_issues_pageInfo {
   readonly __typename: "PageInfo";
   /**
    * When paginating forwards, are there more items?
@@ -19,7 +19,7 @@ export interface UserPile_issues_pageInfo {
   readonly endCursor: string | null;
 }
 
-export interface UserPile_issues_nodes_repository_owner {
+export interface UserPileFragment_issues_nodes_repository_owner {
   readonly __typename: "Organization" | "User";
   /**
    * The username used to login.
@@ -27,7 +27,7 @@ export interface UserPile_issues_nodes_repository_owner {
   readonly login: string;
 }
 
-export interface UserPile_issues_nodes_repository {
+export interface UserPileFragment_issues_nodes_repository {
   readonly __typename: "Repository";
   readonly id: string;
   /**
@@ -57,10 +57,10 @@ export interface UserPile_issues_nodes_repository {
   /**
    * The User owner of the repository.
    */
-  readonly owner: UserPile_issues_nodes_repository_owner;
+  readonly owner: UserPileFragment_issues_nodes_repository_owner;
 }
 
-export interface UserPile_issues_nodes {
+export interface UserPileFragment_issues_nodes {
   readonly __typename: "Issue";
   readonly id: string;
   /**
@@ -94,10 +94,10 @@ export interface UserPile_issues_nodes {
   /**
    * The repository associated with this node.
    */
-  readonly repository: UserPile_issues_nodes_repository;
+  readonly repository: UserPileFragment_issues_nodes_repository;
 }
 
-export interface UserPile_issues {
+export interface UserPileFragment_issues {
   readonly __typename: "IssueConnection";
   /**
    * Identifies the total count of items in the connection.
@@ -106,14 +106,14 @@ export interface UserPile_issues {
   /**
    * Information to aid in pagination.
    */
-  readonly pageInfo: UserPile_issues_pageInfo;
+  readonly pageInfo: UserPileFragment_issues_pageInfo;
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(UserPile_issues_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(UserPileFragment_issues_nodes | null)> | null;
 }
 
-export interface UserPile_pullRequests_pageInfo {
+export interface UserPileFragment_pullRequests_pageInfo {
   readonly __typename: "PageInfo";
   /**
    * When paginating forwards, are there more items?
@@ -125,7 +125,7 @@ export interface UserPile_pullRequests_pageInfo {
   readonly endCursor: string | null;
 }
 
-export interface UserPile_pullRequests_nodes_repository_owner {
+export interface UserPileFragment_pullRequests_nodes_repository_owner {
   readonly __typename: "Organization" | "User";
   /**
    * The username used to login.
@@ -133,7 +133,7 @@ export interface UserPile_pullRequests_nodes_repository_owner {
   readonly login: string;
 }
 
-export interface UserPile_pullRequests_nodes_repository {
+export interface UserPileFragment_pullRequests_nodes_repository {
   readonly __typename: "Repository";
   readonly id: string;
   /**
@@ -163,10 +163,10 @@ export interface UserPile_pullRequests_nodes_repository {
   /**
    * The User owner of the repository.
    */
-  readonly owner: UserPile_pullRequests_nodes_repository_owner;
+  readonly owner: UserPileFragment_pullRequests_nodes_repository_owner;
 }
 
-export interface UserPile_pullRequests_nodes {
+export interface UserPileFragment_pullRequests_nodes {
   readonly __typename: "PullRequest";
   readonly id: string;
   /**
@@ -204,10 +204,10 @@ export interface UserPile_pullRequests_nodes {
   /**
    * The repository associated with this node.
    */
-  readonly repository: UserPile_pullRequests_nodes_repository;
+  readonly repository: UserPileFragment_pullRequests_nodes_repository;
 }
 
-export interface UserPile_pullRequests {
+export interface UserPileFragment_pullRequests {
   readonly __typename: "PullRequestConnection";
   /**
    * Identifies the total count of items in the connection.
@@ -216,14 +216,14 @@ export interface UserPile_pullRequests {
   /**
    * Information to aid in pagination.
    */
-  readonly pageInfo: UserPile_pullRequests_pageInfo;
+  readonly pageInfo: UserPileFragment_pullRequests_pageInfo;
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(UserPile_pullRequests_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(UserPileFragment_pullRequests_nodes | null)> | null;
 }
 
-export interface UserPile {
+export interface UserPileFragment {
   readonly __typename: "User";
   readonly id: string;
   /**
@@ -241,9 +241,9 @@ export interface UserPile {
   /**
    * A list of issues associated with this user.
    */
-  readonly issues: UserPile_issues;
+  readonly issues: UserPileFragment_issues;
   /**
    * A list of pull requests associated with this user.
    */
-  readonly pullRequests: UserPile_pullRequests;
+  readonly pullRequests: UserPileFragment_pullRequests;
 }

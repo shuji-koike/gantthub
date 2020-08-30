@@ -1,8 +1,15 @@
 import React from "react";
-import { GithubConnectionFragment } from ".";
+
+type ConnectionFragment<T = any> = {
+  totalCount: number;
+  pageInfo: {
+    hasNextPage: boolean;
+  };
+  nodes: ReadonlyArray<T | null> | null;
+};
 
 export const PagerMore: React.FC<{
-  frag: GithubConnectionFragment | null | undefined;
+  frag: ConnectionFragment | null | undefined;
 }> = ({ frag }) =>
   frag && PagerUtil.more(frag) ? (
     <span>...{PagerUtil.count(frag)} more!</span>
@@ -11,16 +18,16 @@ export const PagerMore: React.FC<{
   );
 
 export const PagerUtil = {
-  more(e: GithubConnectionFragment) {
+  more(e: ConnectionFragment) {
     return e.pageInfo.hasNextPage;
   },
-  count(e: GithubConnectionFragment) {
+  count(e: ConnectionFragment) {
     return e.totalCount - e.nodes?.length!;
   },
   reduce<
     T extends { __typename: string },
-    A extends GithubConnectionFragment<T>[] = GithubConnectionFragment<T>[]
-  >(...arr: A): GithubConnectionFragment<T> {
+    A extends ConnectionFragment<T>[] = ConnectionFragment<T>[]
+  >(...arr: A): ConnectionFragment<T> {
     return {
       totalCount: arr.reduce((acc, e) => acc + e.totalCount, 0),
       pageInfo: {

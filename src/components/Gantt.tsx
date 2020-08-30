@@ -3,55 +3,62 @@ import dayjs from "dayjs";
 import React, { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { GetMilestones } from "../types/GetMilestones";
+import { GithubMilestoneFragment } from "../types/GithubMilestoneFragment";
+import { QueryMilestones } from "../types/QueryMilestones";
+import { nonNull } from "../util";
 import { GanttHeader } from "./GanttHeader";
 import { GithubItem } from "./GithubItem";
 import { GithubItemFragment } from "./GithubItem";
+import { QuerySuspense } from "./QuerySuspense";
 import { ScrollBox } from "./ScrollBox";
 
-export const Gantt: React.FC = function () {
-  const ref = useRef<HTMLTableElement>(null);
+export default function GanttPage() {
   const params = useParams<{ owner: string; name: string }>();
-  const { data, loading, error } = useQuery<GetMilestones>(query, {
+  const { data, loading, error } = useQuery<QueryMilestones>(query, {
     variables: params,
   });
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error.message}</p>;
-  if (
-    !data ||
-    !data.repository ||
-    !data.repository.milestones ||
-    !data.repository.milestones.nodes
-  )
-    return <p>data is null</p>;
+  return (
+    <QuerySuspense loading={loading} error={error}>
+      {data && <RepositoryGantt data={data} />}
+    </QuerySuspense>
+  );
+}
+
+export const RepositoryGantt: React.FC<{ data: QueryMilestones }> = ({
+  data: { repository },
+}) => (
+  <Gantt frag={repository?.milestones?.nodes?.filter(nonNull)}>
+    <GithubItem
+      frag={repository}
+      label={`${repository?.owner.login}/${repository?.name}`}
+    />
+  </Gantt>
+);
+
+export const Gantt: React.FC<{ frag?: GithubMilestoneFragment[] }> = ({
+  frag = [],
+  children,
+}) => {
+  const ref = useRef<HTMLTableElement>(null);
   const dates = [
-    ...data.repository.milestones.nodes.map(e => e?.createdAt),
-    ...data.repository.milestones.nodes.map(e => e?.dueOn),
-    ...data.repository.milestones.nodes
-      .map(e => e!.issues.nodes!.map(e => e!.createdAt))
-      .flat(),
-    ...data.repository.milestones.nodes
-      .map(e => e!.pullRequests.nodes!.map(e => e!.createdAt))
-      .flat(),
+    ...frag.map(e => e?.createdAt),
+    ...frag.map(e => e?.dueOn),
+    ...frag.map(e => e!.issues.nodes!.map(e => e!.createdAt)).flat(),
+    ...frag.map(e => e!.pullRequests.nodes!.map(e => e!.createdAt)).flat(),
   ]
     .map(e => new Date(e))
     .sort((a, b) => a.getTime() - b.getTime());
   const columns = getDateArray(dates[0], dates[dates.length - 1]);
   const active = {
-    milestone: data.repository.milestones.nodes[0],
-    issue: (data.repository.milestones.nodes[0]?.issues.nodes || [])[0],
+    milestone: frag[0],
+    issue: frag[0]?.issues.nodes?.[0],
   };
   return (
     <ScrollBox>
       <StyledTable ref={ref}>
-        <GanttHeader columns={columns}>
-          <GithubItem
-            frag={data.repository!}
-            label={`${data.repository.owner.login}/${data.repository.name}`}
-          />
-        </GanttHeader>
+        <GanttHeader columns={columns}>{children}</GanttHeader>
         <tbody>
-          {data.repository.milestones.nodes.map(
+          {frag.map(
             milestone =>
               milestone && (
                 <React.Fragment key={milestone.number}>
@@ -157,7 +164,7 @@ export const Gantt: React.FC = function () {
 
 export const Section: React.FC<{
   active: boolean;
-}> = function ({ active, children }) {
+}> = ({ active, children }) => {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (active)
@@ -170,33 +177,25 @@ export const Section: React.FC<{
   return <div ref={ref}>{children}</div>;
 };
 
-const query = gql`
-  query GetMilestones($owner: String!, $name: String!, $first: Int = 25) {
-    repository(owner: $owner, name: $name) {
-      databaseId
-      ...GithubItemFragmentRepository
-      milestones(first: 10, orderBy: { field: DUE_DATE, direction: DESC }) {
-        nodes {
-          ...GithubItemFragmentMilestone
-          issues(first: $first) {
-            nodes {
-              ...GithubItemFragmentIssue
-              ...FragmentAssignees
-              ...FragmentLabels
-            }
-          }
-          pullRequests(first: $first) {
-            nodes {
-              ...GithubItemFragmentPullRequest
-              ...FragmentAssignees
-              ...FragmentLabels
-            }
-          }
-        }
+const MilestoneFragment = gql`
+  fragment GithubMilestoneFragment on Milestone {
+    ...GithubItemFragmentMilestone
+    issues(first: $first) {
+      nodes {
+        ...GithubItemFragmentIssue
+        ...GithubAssigneesFragment
+        ...GithubLabelsFragment
+      }
+    }
+    pullRequests(first: $first) {
+      nodes {
+        ...GithubItemFragmentPullRequest
+        ...GithubAssigneesFragment
+        ...GithubLabelsFragment
       }
     }
   }
-  fragment FragmentAssignees on Assignable {
+  fragment GithubAssigneesFragment on Assignable {
     assignees(first: 10) {
       nodes {
         avatarUrl
@@ -204,7 +203,7 @@ const query = gql`
       }
     }
   }
-  fragment FragmentLabels on Labelable {
+  fragment GithubLabelsFragment on Labelable {
     labels(first: 10) {
       nodes {
         name
@@ -212,10 +211,25 @@ const query = gql`
       }
     }
   }
+`;
+
+const query = gql`
+  query QueryMilestones($owner: String!, $name: String!, $first: Int = 25) {
+    repository(owner: $owner, name: $name) {
+      databaseId
+      ...GithubItemFragmentRepository
+      milestones(first: 10, orderBy: { field: DUE_DATE, direction: DESC }) {
+        nodes {
+          ...GithubMilestoneFragment
+        }
+      }
+    }
+  }
   ${GithubItemFragment.PullRequest}
   ${GithubItemFragment.Issue}
   ${GithubItemFragment.Repository}
   ${GithubItemFragment.Milestone}
+  ${MilestoneFragment}
 `;
 
 const StyledTable = styled.table`

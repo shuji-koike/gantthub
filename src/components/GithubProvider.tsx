@@ -6,10 +6,10 @@ import {
   gql,
 } from "@apollo/client";
 import { PossibleTypesMap } from "@apollo/client/cache/inmemory/policies";
-import React, { useContext, useState, useEffect } from "react";
-import { GetSchema } from "../types/GetSchema";
+import React, { useContext, useState, useEffect, createContext } from "react";
+import { QuerySchema } from "../types/QuerySchema";
 
-const GithubContext = React.createContext({
+const GithubContext = createContext({
   endpoint: "https://api.github.com/graphql",
   token: localStorage.getItem("GITHUB_TOKEN"),
 });
@@ -49,6 +49,14 @@ export const GithubSchemaProvider: React.FC = function ({ children }) {
             Authorization: "bearer " + github.token,
           },
         }),
+        defaultOptions: {
+          watchQuery: {
+            errorPolicy: "all",
+          },
+          query: {
+            errorPolicy: "all",
+          },
+        },
       }))().then(setClient, e => {
       throw e;
     });
@@ -77,7 +85,7 @@ async function getPossibleTypes({
       },
       body: JSON.stringify({
         query: gql`
-          query GetSchema {
+          query QuerySchema {
             __schema {
               types {
                 kind
@@ -96,7 +104,7 @@ async function getPossibleTypes({
       localStorage.removeItem("GITHUB_TOKEN");
       throw new Error(`status: ${res.status}`);
     }
-    const { data }: { data: GetSchema } = await res.json();
+    const { data }: { data: QuerySchema } = await res.json();
     const possibleTypes: PossibleTypesMap = {};
     data.__schema.types.forEach(supertype => {
       if (supertype.possibleTypes) {

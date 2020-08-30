@@ -4,10 +4,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetOrganizationPile
+// GraphQL query operation: QueryRepositoryPile
 // ====================================================
 
-export interface GetOrganizationPile_organization_repositories_nodes_owner {
+export interface QueryRepositoryPile_repository_owner {
   readonly __typename: "Organization" | "User";
   /**
    * The username used to login.
@@ -15,7 +15,35 @@ export interface GetOrganizationPile_organization_repositories_nodes_owner {
   readonly login: string;
 }
 
-export interface GetOrganizationPile_organization_repositories_nodes {
+export interface QueryRepositoryPile_repository_collaborators_pageInfo {
+  readonly __typename: "PageInfo";
+  /**
+   * When paginating forwards, are there more items?
+   */
+  readonly hasNextPage: boolean;
+}
+
+export interface QueryRepositoryPile_repository_collaborators_nodes_issues_pageInfo {
+  readonly __typename: "PageInfo";
+  /**
+   * When paginating forwards, are there more items?
+   */
+  readonly hasNextPage: boolean;
+  /**
+   * When paginating forwards, the cursor to continue.
+   */
+  readonly endCursor: string | null;
+}
+
+export interface QueryRepositoryPile_repository_collaborators_nodes_issues_nodes_repository_owner {
+  readonly __typename: "Organization" | "User";
+  /**
+   * The username used to login.
+   */
+  readonly login: string;
+}
+
+export interface QueryRepositoryPile_repository_collaborators_nodes_issues_nodes_repository {
   readonly __typename: "Repository";
   readonly id: string;
   /**
@@ -45,83 +73,10 @@ export interface GetOrganizationPile_organization_repositories_nodes {
   /**
    * The User owner of the repository.
    */
-  readonly owner: GetOrganizationPile_organization_repositories_nodes_owner;
+  readonly owner: QueryRepositoryPile_repository_collaborators_nodes_issues_nodes_repository_owner;
 }
 
-export interface GetOrganizationPile_organization_repositories {
-  readonly __typename: "RepositoryConnection";
-  /**
-   * A list of nodes.
-   */
-  readonly nodes: ReadonlyArray<(GetOrganizationPile_organization_repositories_nodes | null)> | null;
-}
-
-export interface GetOrganizationPile_organization_membersWithRole_pageInfo {
-  readonly __typename: "PageInfo";
-  /**
-   * When paginating forwards, are there more items?
-   */
-  readonly hasNextPage: boolean;
-  /**
-   * When paginating forwards, the cursor to continue.
-   */
-  readonly endCursor: string | null;
-}
-
-export interface GetOrganizationPile_organization_membersWithRole_nodes_issues_pageInfo {
-  readonly __typename: "PageInfo";
-  /**
-   * When paginating forwards, are there more items?
-   */
-  readonly hasNextPage: boolean;
-  /**
-   * When paginating forwards, the cursor to continue.
-   */
-  readonly endCursor: string | null;
-}
-
-export interface GetOrganizationPile_organization_membersWithRole_nodes_issues_nodes_repository_owner {
-  readonly __typename: "Organization" | "User";
-  /**
-   * The username used to login.
-   */
-  readonly login: string;
-}
-
-export interface GetOrganizationPile_organization_membersWithRole_nodes_issues_nodes_repository {
-  readonly __typename: "Repository";
-  readonly id: string;
-  /**
-   * The HTTP URL for this repository
-   */
-  readonly url: any;
-  /**
-   * The name of the repository.
-   */
-  readonly name: string;
-  /**
-   * The repository's name with owner.
-   */
-  readonly nameWithOwner: string;
-  /**
-   * Indicates if the repository is unmaintained.
-   */
-  readonly isArchived: boolean;
-  /**
-   * Identifies if the repository is a fork.
-   */
-  readonly isFork: boolean;
-  /**
-   * Identifies if the repository is private.
-   */
-  readonly isPrivate: boolean;
-  /**
-   * The User owner of the repository.
-   */
-  readonly owner: GetOrganizationPile_organization_membersWithRole_nodes_issues_nodes_repository_owner;
-}
-
-export interface GetOrganizationPile_organization_membersWithRole_nodes_issues_nodes {
+export interface QueryRepositoryPile_repository_collaborators_nodes_issues_nodes {
   readonly __typename: "Issue";
   readonly id: string;
   /**
@@ -155,10 +110,10 @@ export interface GetOrganizationPile_organization_membersWithRole_nodes_issues_n
   /**
    * The repository associated with this node.
    */
-  readonly repository: GetOrganizationPile_organization_membersWithRole_nodes_issues_nodes_repository;
+  readonly repository: QueryRepositoryPile_repository_collaborators_nodes_issues_nodes_repository;
 }
 
-export interface GetOrganizationPile_organization_membersWithRole_nodes_issues {
+export interface QueryRepositoryPile_repository_collaborators_nodes_issues {
   readonly __typename: "IssueConnection";
   /**
    * Identifies the total count of items in the connection.
@@ -167,14 +122,14 @@ export interface GetOrganizationPile_organization_membersWithRole_nodes_issues {
   /**
    * Information to aid in pagination.
    */
-  readonly pageInfo: GetOrganizationPile_organization_membersWithRole_nodes_issues_pageInfo;
+  readonly pageInfo: QueryRepositoryPile_repository_collaborators_nodes_issues_pageInfo;
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(GetOrganizationPile_organization_membersWithRole_nodes_issues_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(QueryRepositoryPile_repository_collaborators_nodes_issues_nodes | null)> | null;
 }
 
-export interface GetOrganizationPile_organization_membersWithRole_nodes_pullRequests_pageInfo {
+export interface QueryRepositoryPile_repository_collaborators_nodes_pullRequests_pageInfo {
   readonly __typename: "PageInfo";
   /**
    * When paginating forwards, are there more items?
@@ -186,7 +141,7 @@ export interface GetOrganizationPile_organization_membersWithRole_nodes_pullRequ
   readonly endCursor: string | null;
 }
 
-export interface GetOrganizationPile_organization_membersWithRole_nodes_pullRequests_nodes_repository_owner {
+export interface QueryRepositoryPile_repository_collaborators_nodes_pullRequests_nodes_repository_owner {
   readonly __typename: "Organization" | "User";
   /**
    * The username used to login.
@@ -194,7 +149,7 @@ export interface GetOrganizationPile_organization_membersWithRole_nodes_pullRequ
   readonly login: string;
 }
 
-export interface GetOrganizationPile_organization_membersWithRole_nodes_pullRequests_nodes_repository {
+export interface QueryRepositoryPile_repository_collaborators_nodes_pullRequests_nodes_repository {
   readonly __typename: "Repository";
   readonly id: string;
   /**
@@ -224,10 +179,10 @@ export interface GetOrganizationPile_organization_membersWithRole_nodes_pullRequ
   /**
    * The User owner of the repository.
    */
-  readonly owner: GetOrganizationPile_organization_membersWithRole_nodes_pullRequests_nodes_repository_owner;
+  readonly owner: QueryRepositoryPile_repository_collaborators_nodes_pullRequests_nodes_repository_owner;
 }
 
-export interface GetOrganizationPile_organization_membersWithRole_nodes_pullRequests_nodes {
+export interface QueryRepositoryPile_repository_collaborators_nodes_pullRequests_nodes {
   readonly __typename: "PullRequest";
   readonly id: string;
   /**
@@ -265,10 +220,10 @@ export interface GetOrganizationPile_organization_membersWithRole_nodes_pullRequ
   /**
    * The repository associated with this node.
    */
-  readonly repository: GetOrganizationPile_organization_membersWithRole_nodes_pullRequests_nodes_repository;
+  readonly repository: QueryRepositoryPile_repository_collaborators_nodes_pullRequests_nodes_repository;
 }
 
-export interface GetOrganizationPile_organization_membersWithRole_nodes_pullRequests {
+export interface QueryRepositoryPile_repository_collaborators_nodes_pullRequests {
   readonly __typename: "PullRequestConnection";
   /**
    * Identifies the total count of items in the connection.
@@ -277,14 +232,14 @@ export interface GetOrganizationPile_organization_membersWithRole_nodes_pullRequ
   /**
    * Information to aid in pagination.
    */
-  readonly pageInfo: GetOrganizationPile_organization_membersWithRole_nodes_pullRequests_pageInfo;
+  readonly pageInfo: QueryRepositoryPile_repository_collaborators_nodes_pullRequests_pageInfo;
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(GetOrganizationPile_organization_membersWithRole_nodes_pullRequests_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(QueryRepositoryPile_repository_collaborators_nodes_pullRequests_nodes | null)> | null;
 }
 
-export interface GetOrganizationPile_organization_membersWithRole_nodes {
+export interface QueryRepositoryPile_repository_collaborators_nodes {
   readonly __typename: "User";
   readonly id: string;
   /**
@@ -302,15 +257,15 @@ export interface GetOrganizationPile_organization_membersWithRole_nodes {
   /**
    * A list of issues associated with this user.
    */
-  readonly issues: GetOrganizationPile_organization_membersWithRole_nodes_issues;
+  readonly issues: QueryRepositoryPile_repository_collaborators_nodes_issues;
   /**
    * A list of pull requests associated with this user.
    */
-  readonly pullRequests: GetOrganizationPile_organization_membersWithRole_nodes_pullRequests;
+  readonly pullRequests: QueryRepositoryPile_repository_collaborators_nodes_pullRequests;
 }
 
-export interface GetOrganizationPile_organization_membersWithRole {
-  readonly __typename: "OrganizationMemberConnection";
+export interface QueryRepositoryPile_repository_collaborators {
+  readonly __typename: "RepositoryCollaboratorConnection";
   /**
    * Identifies the total count of items in the connection.
    */
@@ -318,47 +273,60 @@ export interface GetOrganizationPile_organization_membersWithRole {
   /**
    * Information to aid in pagination.
    */
-  readonly pageInfo: GetOrganizationPile_organization_membersWithRole_pageInfo;
+  readonly pageInfo: QueryRepositoryPile_repository_collaborators_pageInfo;
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(GetOrganizationPile_organization_membersWithRole_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(QueryRepositoryPile_repository_collaborators_nodes | null)> | null;
 }
 
-export interface GetOrganizationPile_organization {
-  readonly __typename: "Organization";
+export interface QueryRepositoryPile_repository {
+  readonly __typename: "Repository";
   readonly id: string;
   /**
-   * The HTTP URL for this organization.
+   * The HTTP URL for this repository
    */
   readonly url: any;
   /**
-   * The organization's public profile name.
+   * The name of the repository.
    */
-  readonly name: string | null;
+  readonly name: string;
   /**
-   * The organization's login name.
+   * The repository's name with owner.
    */
-  readonly login: string;
+  readonly nameWithOwner: string;
   /**
-   * A list of repositories that the user owns.
+   * Indicates if the repository is unmaintained.
    */
-  readonly repositories: GetOrganizationPile_organization_repositories;
+  readonly isArchived: boolean;
   /**
-   * A list of users who are members of this organization.
+   * Identifies if the repository is a fork.
    */
-  readonly membersWithRole: GetOrganizationPile_organization_membersWithRole;
+  readonly isFork: boolean;
+  /**
+   * Identifies if the repository is private.
+   */
+  readonly isPrivate: boolean;
+  /**
+   * The User owner of the repository.
+   */
+  readonly owner: QueryRepositoryPile_repository_owner;
+  /**
+   * A list of collaborators associated with the repository.
+   */
+  readonly collaborators: QueryRepositoryPile_repository_collaborators | null;
 }
 
-export interface GetOrganizationPile {
+export interface QueryRepositoryPile {
   /**
-   * Lookup a organization by login.
+   * Lookup a given repository by the owner and repository name.
    */
-  readonly organization: GetOrganizationPile_organization | null;
+  readonly repository: QueryRepositoryPile_repository | null;
 }
 
-export interface GetOrganizationPileVariables {
-  readonly login: string;
+export interface QueryRepositoryPileVariables {
+  readonly owner: string;
+  readonly name: string;
   readonly limit?: number | null;
   readonly after?: string | null;
 }

@@ -1,40 +1,40 @@
 import firebase from "firebase/app";
-import React, { useState, useEffect } from "react";
-import "firebase/auth";
-import "firebase/firestore";
-import "firebase/analytics";
-import "firebase/storage";
-import "firebase/functions";
-import "./index.css";
+import { useState, useEffect, createContext } from "react";
 import { firebaseConfig } from "./config";
 
-export const app = firebase.initializeApp(firebaseConfig);
+import "firebase/auth";
 
-export type AuthError = firebase.auth.Error | undefined;
-export type AuthUser = firebase.User | null | undefined;
+type AuthError = firebase.auth.Error | undefined;
+type AuthUser = firebase.User | null | undefined;
 
-interface LoginData {
+type LoginData = {
   email: string;
   password: string;
-}
+};
+
+export const app = firebase.initializeApp(firebaseConfig);
 
 export async function login({ email, password }: LoginData) {
   const { user } = await app.auth().signInWithEmailAndPassword(email, password);
   return user;
 }
 
-export function loginWithGithub() {
-  const provider = new firebase.auth.GithubAuthProvider().addScope("repo");
-  return firebase.auth().signInWithRedirect(provider);
+export async function loginWithGithub() {
+  const provider = new firebase.auth.GithubAuthProvider();
+  provider.addScope("repo");
+  provider.addScope("read:org");
+  const { credential } = await firebase.auth().signInWithPopup(provider);
+  const obj = credential?.toJSON();
+  if (obj && "oauthAccessToken" in obj)
+    localStorage.setItem("GITHUB_TOKEN", obj["oauthAccessToken"]);
 }
 
 export async function logout() {
+  localStorage.removeItem("GITHUB_TOKEN");
   await app.auth().signOut();
 }
 
-export const UserContext = React.createContext<AuthUser>(
-  app.auth().currentUser
-);
+export const UserContext = createContext<AuthUser>(app.auth().currentUser);
 
 export function useAuth() {
   const [user, setAuthUser] = useState<AuthUser>();

@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
-import React from "react";
+import React, { createElement } from "react";
 import { Link } from "react-router-dom";
+import { GithubFragment } from "../types";
 import { GithubIcon } from "./GithubIcon";
-import { GithubFragment } from ".";
 
 export const GithubItem: React.FC<{
   frag: GithubFragment | null;
@@ -25,8 +25,8 @@ export const GithubItemLink: React.FC<{
   title?: string;
 }> = ({ frag, link, title, children }) => {
   return link
-    ? React.createElement(Link, { to: link!, title }, children ?? title)
-    : React.createElement("a", { href: frag.url, title }, children ?? title);
+    ? createElement(Link, { to: link!, title }, children ?? title)
+    : createElement("a", { href: frag.url, title }, children ?? title);
 };
 
 function getLabel(frag: GithubFragment) {

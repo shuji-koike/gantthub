@@ -4,10 +4,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: FragmentAssignees
+// GraphQL fragment: GithubAssigneesFragment
 // ====================================================
 
-export interface FragmentAssignees_assignees_nodes {
+export interface GithubAssigneesFragment_assignees_nodes {
   readonly __typename: "User";
   /**
    * A URL pointing to the user's public avatar.
@@ -19,18 +19,18 @@ export interface FragmentAssignees_assignees_nodes {
   readonly login: string;
 }
 
-export interface FragmentAssignees_assignees {
+export interface GithubAssigneesFragment_assignees {
   readonly __typename: "UserConnection";
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(FragmentAssignees_assignees_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(GithubAssigneesFragment_assignees_nodes | null)> | null;
 }
 
-export interface FragmentAssignees {
+export interface GithubAssigneesFragment {
   readonly __typename: "Issue" | "PullRequest";
   /**
    * A list of Users assigned to this object.
    */
-  readonly assignees: FragmentAssignees_assignees;
+  readonly assignees: GithubAssigneesFragment_assignees;
 }

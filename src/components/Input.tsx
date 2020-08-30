@@ -1,28 +1,28 @@
 import React, { useCallback } from "react";
-import { useLocalStorage } from "../util";
+import { useStorage } from "../util";
 
 type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "name"> & {
   name: string;
-  store?: boolean;
+  storage?: Storage;
 };
 
 export const Input: React.FC<InputProps> = function ({
   name,
   placeholder = name,
   onChange,
-  store = false,
+  storage,
   ...props
 }) {
-  const [value, setValue] = useLocalStorage(name, store);
+  const [value, setValue] = useStorage(name, storage);
   return (
     <input
       {...props}
-      value={value as string}
+      value={value as string} //TODO
       name={name}
       placeholder={placeholder}
       onChange={useCallback(
-        e => {
-          (setValue as (value: string) => {})(e.target.value);
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+          (setValue as (value: string) => {})(e.target.value); //TODO
           onChange?.(e);
         },
         [setValue, onChange]

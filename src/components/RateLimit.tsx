@@ -1,11 +1,11 @@
 import { gql, useQuery } from "@apollo/client";
 import React from "react";
 import styled from "styled-components";
-import { GetRateLimit } from "../types/GetRateLimit";
+import { QueryRateLimit } from "../types/QueryRateLimit";
 
 export const RateLimit: React.FC = function ({ children }) {
-  const { data, loading, error } = useQuery<GetRateLimit>(gql`
-    query GetRateLimit {
+  const { data, loading, error } = useQuery<QueryRateLimit>(gql`
+    query QueryRateLimit {
       rateLimit {
         limit
         cost
@@ -15,10 +15,15 @@ export const RateLimit: React.FC = function ({ children }) {
     }
   `);
   if (loading) return <>Loading...</>;
-  if (error) throw error;
+  if (error)
+    return (
+      <>
+        {error.message}
+        {children}
+      </>
+    );
   if (!data || !data.rateLimit) throw new Error();
-  console.debug(`rateLimit.remaining: ${data.rateLimit.remaining}`);
-  console.debug(`rateLimit.resetAt: ${new Date(data.rateLimit.resetAt)}`);
+  console.debug(`rateLimit: ${JSON.stringify(data.rateLimit)}}`);
   let message: React.ReactNode;
   if (data.rateLimit.remaining! < 100) {
     message = <p style={{ color: "red" }}>github api rate limit exceeded!!!</p>;

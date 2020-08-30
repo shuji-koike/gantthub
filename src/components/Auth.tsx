@@ -1,5 +1,8 @@
 import React, { useContext } from "react";
 import { UserContext, loginWithGithub, logout } from "../firebase";
+import { Button } from "./Button";
+import { Form } from "./Form";
+import { Input } from "./Input";
 
 export const Auth: React.FC = () => {
   const user = useContext(UserContext);
@@ -7,12 +10,18 @@ export const Auth: React.FC = () => {
     return <>Loadging...</>;
   }
   if (!user) {
-    return <button onClick={loginWithGithub}>loginWithGithub</button>;
+    return <Button onClick={loginWithGithub} label="Login" />;
   }
   return (
-    <>
+    <Form>
       <span>{user.displayName}</span>
-      <button onClick={logout}>logout</button>
-    </>
+      <Input
+        type="password"
+        name="GITHUB_TOKEN"
+        autoComplete="token"
+        storage={localStorage}
+      />
+      <Button onClick={logout} label="Logout" />
+    </Form>
   );
 };

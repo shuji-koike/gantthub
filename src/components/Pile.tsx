@@ -1,148 +1,16 @@
 import { gql, useQuery } from "@apollo/client";
 import React from "react";
-import { useLocation, useParams } from "react-router-dom";
-import {
-  GetOrganizationPile,
-  GetOrganizationPileVariables,
-} from "../types/GetOrganizationPile";
-import {
-  GetRepositoryPile,
-  GetRepositoryPileVariables,
-} from "../types/GetRepositoryPile";
+import { useParams } from "react-router-dom";
 import { GithubItemFragmentRepository } from "../types/GithubItemFragmentRepository";
 import {
-  UserPile,
-  UserPile_pullRequests_nodes,
-  UserPile_issues_nodes,
-} from "../types/UserPile";
+  UserPileFragment,
+  UserPileFragment_pullRequests_nodes,
+  UserPileFragment_issues_nodes,
+} from "../types/UserPileFragment";
 import { GithubItem, GithubItemFragment } from "./GithubItem";
 import { PagerMore, PagerUtil } from "./Pager";
 
-export const RepositoryPile: React.FC = function () {
-  const params = useParams<{ owner: string; name: string }>();
-  const search = new URLSearchParams(useLocation().search);
-  const variables = {
-    ...params,
-    limit: Number(search.get("limit")) || undefined,
-  };
-  const query = gql`
-    query GetRepositoryPile(
-      $owner: String!
-      $name: String!
-      $limit: Int = 20
-      $after: String
-    ) {
-      repository(owner: $owner, name: $name) {
-        ...GithubItemFragmentRepository
-        owner {
-          login
-        }
-        collaborators(first: $limit, after: $after) {
-          totalCount
-          pageInfo {
-            hasNextPage
-          }
-          nodes {
-            ...UserPile
-          }
-        }
-      }
-    }
-    ${GithubItemFragment.Repository}
-    ${fragments}
-  `;
-  const { data, loading, error } = useQuery<
-    GetRepositoryPile,
-    GetRepositoryPileVariables
-  >(query, { variables });
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error.message}</p>;
-  if (!data) return <p>data is null</p>;
-  return (
-    <section>
-      {data.repository?.collaborators?.nodes?.map(e => (
-        <React.Fragment key={e?.id}>
-          <p>
-            <GithubItem frag={e} />
-          </p>
-          <Pile data={e!}></Pile>
-        </React.Fragment>
-      ))}
-      <PagerMore frag={data.repository?.collaborators} />
-    </section>
-  );
-};
-
-export const OrganizationPile: React.FC = function () {
-  const params = useParams<{ login: string }>();
-  const search = new URLSearchParams(useLocation().search);
-  const variables = {
-    ...params,
-    limit: Number(search.get("limit")) || undefined,
-  };
-  const query = gql`
-    query GetOrganizationPile(
-      $login: String!
-      $limit: Int = 20
-      $after: String
-    ) {
-      organization(login: $login) {
-        ...GithubItemFragmentOrganization
-        repositories(
-          first: 10
-          orderBy: { field: PUSHED_AT, direction: DESC }
-        ) {
-          nodes {
-            ...GithubItemFragmentRepository
-          }
-        }
-        membersWithRole(first: $limit, after: $after) {
-          totalCount
-          pageInfo {
-            hasNextPage
-            endCursor
-          }
-          nodes {
-            ...UserPile
-          }
-        }
-      }
-    }
-    ${fragments}
-    ${GithubItemFragment.Organization}
-    ${GithubItemFragment.Repository}
-  `;
-  const { data, loading, error } = useQuery<
-    GetOrganizationPile,
-    GetOrganizationPileVariables
-  >(query, { variables });
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error.message}</p>;
-  if (!data || !data.organization) return <p>data is null</p>;
-  return (
-    <section>
-      <header>
-        {data.organization.repositories.nodes?.map(e => (
-          <GithubItem
-            key={e?.id}
-            frag={e}
-            link={`/${e?.owner.login}/${e?.name}/pile`}
-          />
-        ))}
-      </header>
-      {data.organization.membersWithRole.nodes?.map(e => (
-        <React.Fragment key={e?.id}>
-          <p>
-            <GithubItem frag={e} />
-          </p>
-          <Pile data={e!}></Pile>
-        </React.Fragment>
-      ))}
-    </section>
-  );
-};
-
-export const Pile: React.FC<{ data: UserPile }> = function ({ data }) {
+export const Pile: React.FC<{ data: UserPileFragment }> = function ({ data }) {
   const { owner, name, login } = useParams<{
     owner?: string;
     name?: string;
@@ -156,7 +24,7 @@ export const Pile: React.FC<{ data: UserPile }> = function ({ data }) {
     ].join("");
   }
   const frag = PagerUtil.reduce<
-    UserPile_pullRequests_nodes | UserPile_issues_nodes
+    UserPileFragment_pullRequests_nodes | UserPileFragment_issues_nodes
   >(data.issues, data.pullRequests);
   return (
     <ul>
@@ -178,8 +46,8 @@ export const Pile: React.FC<{ data: UserPile }> = function ({ data }) {
   );
 };
 
-const fragments = gql`
-  fragment UserPile on User {
+export const fragments = gql`
+  fragment UserPileFragment on User {
     ...GithubItemFragmentUser
     issues(
       first: 10

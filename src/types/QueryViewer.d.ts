@@ -6,10 +6,10 @@
 import { RepositoryOrder, PullRequestReviewDecision } from "./globalTypes";
 
 // ====================================================
-// GraphQL query operation: GetViewer
+// GraphQL query operation: QueryViewer
 // ====================================================
 
-export interface GetViewer_viewer_issues_pageInfo {
+export interface QueryViewer_viewer_issues_pageInfo {
   readonly __typename: "PageInfo";
   /**
    * When paginating forwards, are there more items?
@@ -17,7 +17,7 @@ export interface GetViewer_viewer_issues_pageInfo {
   readonly hasNextPage: boolean;
 }
 
-export interface GetViewer_viewer_issues_nodes {
+export interface QueryViewer_viewer_issues_nodes {
   readonly __typename: "Issue";
   readonly id: string;
   /**
@@ -50,7 +50,7 @@ export interface GetViewer_viewer_issues_nodes {
   readonly closed: boolean;
 }
 
-export interface GetViewer_viewer_issues {
+export interface QueryViewer_viewer_issues {
   readonly __typename: "IssueConnection";
   /**
    * Identifies the total count of items in the connection.
@@ -59,14 +59,14 @@ export interface GetViewer_viewer_issues {
   /**
    * Information to aid in pagination.
    */
-  readonly pageInfo: GetViewer_viewer_issues_pageInfo;
+  readonly pageInfo: QueryViewer_viewer_issues_pageInfo;
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(GetViewer_viewer_issues_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(QueryViewer_viewer_issues_nodes | null)> | null;
 }
 
-export interface GetViewer_viewer_pullRequests_pageInfo {
+export interface QueryViewer_viewer_pullRequests_pageInfo {
   readonly __typename: "PageInfo";
   /**
    * When paginating forwards, are there more items?
@@ -74,7 +74,7 @@ export interface GetViewer_viewer_pullRequests_pageInfo {
   readonly hasNextPage: boolean;
 }
 
-export interface GetViewer_viewer_pullRequests_nodes_commits {
+export interface QueryViewer_viewer_pullRequests_nodes_commits {
   readonly __typename: "PullRequestCommitConnection";
   /**
    * Identifies the total count of items in the connection.
@@ -82,7 +82,7 @@ export interface GetViewer_viewer_pullRequests_nodes_commits {
   readonly totalCount: number;
 }
 
-export interface GetViewer_viewer_pullRequests_nodes_comments {
+export interface QueryViewer_viewer_pullRequests_nodes_comments {
   readonly __typename: "IssueCommentConnection";
   /**
    * Identifies the total count of items in the connection.
@@ -90,7 +90,7 @@ export interface GetViewer_viewer_pullRequests_nodes_comments {
   readonly totalCount: number;
 }
 
-export interface GetViewer_viewer_pullRequests_nodes_reviews_pageInfo {
+export interface QueryViewer_viewer_pullRequests_nodes_reviews_pageInfo {
   readonly __typename: "PageInfo";
   /**
    * When paginating forwards, are there more items?
@@ -98,7 +98,7 @@ export interface GetViewer_viewer_pullRequests_nodes_reviews_pageInfo {
   readonly hasNextPage: boolean;
 }
 
-export interface GetViewer_viewer_pullRequests_nodes_reviews_nodes_comments_pageInfo {
+export interface QueryViewer_viewer_pullRequests_nodes_reviews_nodes_comments_pageInfo {
   readonly __typename: "PageInfo";
   /**
    * When paginating forwards, are there more items?
@@ -106,7 +106,7 @@ export interface GetViewer_viewer_pullRequests_nodes_reviews_nodes_comments_page
   readonly hasNextPage: boolean;
 }
 
-export interface GetViewer_viewer_pullRequests_nodes_reviews_nodes_comments_nodes {
+export interface QueryViewer_viewer_pullRequests_nodes_reviews_nodes_comments_nodes {
   readonly __typename: "PullRequestReviewComment";
   /**
    * Returns whether or not a comment has been minimized.
@@ -114,7 +114,7 @@ export interface GetViewer_viewer_pullRequests_nodes_reviews_nodes_comments_node
   readonly isMinimized: boolean;
 }
 
-export interface GetViewer_viewer_pullRequests_nodes_reviews_nodes_comments {
+export interface QueryViewer_viewer_pullRequests_nodes_reviews_nodes_comments {
   readonly __typename: "PullRequestReviewCommentConnection";
   /**
    * Identifies the total count of items in the connection.
@@ -123,22 +123,22 @@ export interface GetViewer_viewer_pullRequests_nodes_reviews_nodes_comments {
   /**
    * Information to aid in pagination.
    */
-  readonly pageInfo: GetViewer_viewer_pullRequests_nodes_reviews_nodes_comments_pageInfo;
+  readonly pageInfo: QueryViewer_viewer_pullRequests_nodes_reviews_nodes_comments_pageInfo;
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(GetViewer_viewer_pullRequests_nodes_reviews_nodes_comments_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(QueryViewer_viewer_pullRequests_nodes_reviews_nodes_comments_nodes | null)> | null;
 }
 
-export interface GetViewer_viewer_pullRequests_nodes_reviews_nodes {
+export interface QueryViewer_viewer_pullRequests_nodes_reviews_nodes {
   readonly __typename: "PullRequestReview";
   /**
    * A list of review comments for the current pull request review.
    */
-  readonly comments: GetViewer_viewer_pullRequests_nodes_reviews_nodes_comments;
+  readonly comments: QueryViewer_viewer_pullRequests_nodes_reviews_nodes_comments;
 }
 
-export interface GetViewer_viewer_pullRequests_nodes_reviews {
+export interface QueryViewer_viewer_pullRequests_nodes_reviews {
   readonly __typename: "PullRequestReviewConnection";
   /**
    * Identifies the total count of items in the connection.
@@ -147,14 +147,14 @@ export interface GetViewer_viewer_pullRequests_nodes_reviews {
   /**
    * Information to aid in pagination.
    */
-  readonly pageInfo: GetViewer_viewer_pullRequests_nodes_reviews_pageInfo;
+  readonly pageInfo: QueryViewer_viewer_pullRequests_nodes_reviews_pageInfo;
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(GetViewer_viewer_pullRequests_nodes_reviews_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(QueryViewer_viewer_pullRequests_nodes_reviews_nodes | null)> | null;
 }
 
-export interface GetViewer_viewer_pullRequests_nodes {
+export interface QueryViewer_viewer_pullRequests_nodes {
   readonly __typename: "PullRequest";
   readonly id: string;
   /**
@@ -204,18 +204,18 @@ export interface GetViewer_viewer_pullRequests_nodes {
   /**
    * A list of commits present in this pull request's head branch not present in the base branch.
    */
-  readonly commits: GetViewer_viewer_pullRequests_nodes_commits;
+  readonly commits: QueryViewer_viewer_pullRequests_nodes_commits;
   /**
    * A list of comments associated with the pull request.
    */
-  readonly comments: GetViewer_viewer_pullRequests_nodes_comments;
+  readonly comments: QueryViewer_viewer_pullRequests_nodes_comments;
   /**
    * A list of reviews associated with the pull request.
    */
-  readonly reviews: GetViewer_viewer_pullRequests_nodes_reviews | null;
+  readonly reviews: QueryViewer_viewer_pullRequests_nodes_reviews | null;
 }
 
-export interface GetViewer_viewer_pullRequests {
+export interface QueryViewer_viewer_pullRequests {
   readonly __typename: "PullRequestConnection";
   /**
    * Identifies the total count of items in the connection.
@@ -224,14 +224,14 @@ export interface GetViewer_viewer_pullRequests {
   /**
    * Information to aid in pagination.
    */
-  readonly pageInfo: GetViewer_viewer_pullRequests_pageInfo;
+  readonly pageInfo: QueryViewer_viewer_pullRequests_pageInfo;
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(GetViewer_viewer_pullRequests_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(QueryViewer_viewer_pullRequests_nodes | null)> | null;
 }
 
-export interface GetViewer_viewer_repositories_pageInfo {
+export interface QueryViewer_viewer_repositories_pageInfo {
   readonly __typename: "PageInfo";
   /**
    * When paginating forwards, are there more items?
@@ -239,7 +239,7 @@ export interface GetViewer_viewer_repositories_pageInfo {
   readonly hasNextPage: boolean;
 }
 
-export interface GetViewer_viewer_repositories_nodes_owner {
+export interface QueryViewer_viewer_repositories_nodes_owner {
   readonly __typename: "Organization" | "User";
   /**
    * The username used to login.
@@ -247,7 +247,7 @@ export interface GetViewer_viewer_repositories_nodes_owner {
   readonly login: string;
 }
 
-export interface GetViewer_viewer_repositories_nodes {
+export interface QueryViewer_viewer_repositories_nodes {
   readonly __typename: "Repository";
   readonly id: string;
   /**
@@ -277,10 +277,10 @@ export interface GetViewer_viewer_repositories_nodes {
   /**
    * The User owner of the repository.
    */
-  readonly owner: GetViewer_viewer_repositories_nodes_owner;
+  readonly owner: QueryViewer_viewer_repositories_nodes_owner;
 }
 
-export interface GetViewer_viewer_repositories {
+export interface QueryViewer_viewer_repositories {
   readonly __typename: "RepositoryConnection";
   /**
    * Identifies the total count of items in the connection.
@@ -289,14 +289,14 @@ export interface GetViewer_viewer_repositories {
   /**
    * Information to aid in pagination.
    */
-  readonly pageInfo: GetViewer_viewer_repositories_pageInfo;
+  readonly pageInfo: QueryViewer_viewer_repositories_pageInfo;
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(GetViewer_viewer_repositories_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(QueryViewer_viewer_repositories_nodes | null)> | null;
 }
 
-export interface GetViewer_viewer_organizations_nodes_repositories_pageInfo {
+export interface QueryViewer_viewer_organizations_nodes_repositories_pageInfo {
   readonly __typename: "PageInfo";
   /**
    * When paginating forwards, are there more items?
@@ -304,7 +304,7 @@ export interface GetViewer_viewer_organizations_nodes_repositories_pageInfo {
   readonly hasNextPage: boolean;
 }
 
-export interface GetViewer_viewer_organizations_nodes_repositories_nodes_owner {
+export interface QueryViewer_viewer_organizations_nodes_repositories_nodes_owner {
   readonly __typename: "Organization" | "User";
   /**
    * The username used to login.
@@ -312,7 +312,7 @@ export interface GetViewer_viewer_organizations_nodes_repositories_nodes_owner {
   readonly login: string;
 }
 
-export interface GetViewer_viewer_organizations_nodes_repositories_nodes {
+export interface QueryViewer_viewer_organizations_nodes_repositories_nodes {
   readonly __typename: "Repository";
   readonly id: string;
   /**
@@ -342,10 +342,10 @@ export interface GetViewer_viewer_organizations_nodes_repositories_nodes {
   /**
    * The User owner of the repository.
    */
-  readonly owner: GetViewer_viewer_organizations_nodes_repositories_nodes_owner;
+  readonly owner: QueryViewer_viewer_organizations_nodes_repositories_nodes_owner;
 }
 
-export interface GetViewer_viewer_organizations_nodes_repositories {
+export interface QueryViewer_viewer_organizations_nodes_repositories {
   readonly __typename: "RepositoryConnection";
   /**
    * Identifies the total count of items in the connection.
@@ -354,14 +354,14 @@ export interface GetViewer_viewer_organizations_nodes_repositories {
   /**
    * Information to aid in pagination.
    */
-  readonly pageInfo: GetViewer_viewer_organizations_nodes_repositories_pageInfo;
+  readonly pageInfo: QueryViewer_viewer_organizations_nodes_repositories_pageInfo;
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(GetViewer_viewer_organizations_nodes_repositories_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(QueryViewer_viewer_organizations_nodes_repositories_nodes | null)> | null;
 }
 
-export interface GetViewer_viewer_organizations_nodes {
+export interface QueryViewer_viewer_organizations_nodes {
   readonly __typename: "Organization";
   readonly id: string;
   /**
@@ -379,18 +379,18 @@ export interface GetViewer_viewer_organizations_nodes {
   /**
    * A list of repositories that the user owns.
    */
-  readonly repositories: GetViewer_viewer_organizations_nodes_repositories;
+  readonly repositories: QueryViewer_viewer_organizations_nodes_repositories;
 }
 
-export interface GetViewer_viewer_organizations {
+export interface QueryViewer_viewer_organizations {
   readonly __typename: "OrganizationConnection";
   /**
    * A list of nodes.
    */
-  readonly nodes: ReadonlyArray<(GetViewer_viewer_organizations_nodes | null)> | null;
+  readonly nodes: ReadonlyArray<(QueryViewer_viewer_organizations_nodes | null)> | null;
 }
 
-export interface GetViewer_viewer {
+export interface QueryViewer_viewer {
   readonly __typename: "User";
   readonly id: string;
   /**
@@ -408,29 +408,29 @@ export interface GetViewer_viewer {
   /**
    * A list of issues associated with this user.
    */
-  readonly issues: GetViewer_viewer_issues;
+  readonly issues: QueryViewer_viewer_issues;
   /**
    * A list of pull requests associated with this user.
    */
-  readonly pullRequests: GetViewer_viewer_pullRequests;
+  readonly pullRequests: QueryViewer_viewer_pullRequests;
   /**
    * A list of repositories that the user owns.
    */
-  readonly repositories: GetViewer_viewer_repositories;
+  readonly repositories: QueryViewer_viewer_repositories;
   /**
    * A list of organizations the user belongs to.
    */
-  readonly organizations: GetViewer_viewer_organizations;
+  readonly organizations: QueryViewer_viewer_organizations;
 }
 
-export interface GetViewer {
+export interface QueryViewer {
   /**
    * The currently authenticated user.
    */
-  readonly viewer: GetViewer_viewer;
+  readonly viewer: QueryViewer_viewer;
 }
 
-export interface GetViewerVariables {
+export interface QueryViewerVariables {
   readonly first?: number | null;
   readonly orderBy?: RepositoryOrder | null;
 }

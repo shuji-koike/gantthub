@@ -7,29 +7,29 @@ export interface ScrollBoxEvent {
 }
 
 export const ScrollBox: React.FC<{
-  onScroll?: (e: ScrollBoxEvent) => ScrollBoxEvent;
+  onScroll?: (event: ScrollBoxEvent) => ScrollBoxEvent;
 }> = function ({ onScroll, children }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const current = ref.current!;
-    const listener = (event: Event) => {
-      if (event.target !== current) return;
-      const width = current.scrollWidth! - current.clientWidth!;
-      const height = current.scrollHeight! - current.clientHeight!;
-      const e = {
-        x: current.scrollLeft! / width,
-        y: current.scrollTop! / height,
+    const el = ref.current;
+    const listener = ({ target }: Event) => {
+      if (!el || target !== el) return;
+      const width = el.scrollWidth - el.clientWidth;
+      const height = el.scrollHeight - el.clientHeight;
+      const ev = {
+        x: el.scrollLeft / width,
+        y: el.scrollTop / height,
       };
       if (onScroll) {
-        const ret = onScroll(e);
-        current.scrollTo({
-          left: e.x !== ret.x ? ret.x * width : undefined,
-          top: e.y !== ret.y ? ret.y * height : undefined,
+        const ret = onScroll(ev);
+        el.scrollTo({
+          left: ev.x !== ret.x ? ret.x * width : undefined,
+          top: ev.y !== ret.y ? ret.y * height : undefined,
         });
       }
     };
-    current.addEventListener("scroll", listener, true);
-    return () => current.removeEventListener("scroll", listener);
+    el?.addEventListener("scroll", listener, true);
+    return () => el?.removeEventListener("scroll", listener);
   }, [onScroll]);
   return <StyledDiv ref={ref}>{children}</StyledDiv>;
 };

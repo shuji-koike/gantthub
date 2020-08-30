@@ -4,10 +4,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetRateLimit
+// GraphQL query operation: QueryRateLimit
 // ====================================================
 
-export interface GetRateLimit_rateLimit {
+export interface QueryRateLimit_rateLimit {
   readonly __typename: "RateLimit";
   /**
    * The maximum number of points the client is permitted to consume in a 60 minute window.
@@ -27,9 +27,9 @@ export interface GetRateLimit_rateLimit {
   readonly resetAt: any;
 }
 
-export interface GetRateLimit {
+export interface QueryRateLimit {
   /**
    * The client's rate limit information.
    */
-  readonly rateLimit: GetRateLimit_rateLimit | null;
+  readonly rateLimit: QueryRateLimit_rateLimit | null;
 }
