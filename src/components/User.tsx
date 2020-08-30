@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { GithubUserFragment } from "../types/GithubUserFragment";
 import { QueryUser } from "../types/QueryUser";
-import { nonNull } from "../util";
+import { nodes } from "../util";
 import { GithubItem, GithubItemFragment } from "./GithubItem";
 import { PagerMore } from "./Pager";
 import { PullRequestItem, PullRequestItemFragment } from "./PullRequestItem";
@@ -30,11 +30,7 @@ export const User: React.FC<{
   return (
     <StyledSection>
       <ul>
-        <li>
-          <GithubItem frag={frag} />
-          <Repositories frag={frag.repositories} />
-        </li>
-        {frag.organizations.nodes?.filter(nonNull).map(org => (
+        {[frag, ...nodes(frag.organizations)].map(org => (
           <li key={org.login}>
             <GithubItem frag={org} link={`/org/${org.login}/pile`} />
             <Repositories frag={org.repositories} />

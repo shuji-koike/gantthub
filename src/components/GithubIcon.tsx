@@ -20,10 +20,10 @@ import { GithubFragment } from "../types";
 export const GithubIcon: React.FC<{
   frag: GithubFragment | null;
 }> = ({ frag }) =>
-  frag && <StyledGithubIcon as={icon(frag)} color={color(frag)} />;
+  frag && <StyledGithubIcon as={icon(frag)} style={{ color: color(frag) }} />;
 
-const StyledGithubIcon = styled.svg<{ color: CSSProperties["color"] }>`
-  color: ${({ color }) => color};
+const StyledGithubIcon = styled.svg<{ style?: CSSProperties }>`
+  color: ${props => props.style?.color};
   & + * {
     margin-left: 0.25rem;
   }

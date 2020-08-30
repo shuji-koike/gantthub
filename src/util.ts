@@ -4,6 +4,12 @@ export function nonNull<T>(value: T | null): value is T {
   return value !== null;
 }
 
+export function nodes<T extends Object>(
+  frag: { nodes: ReadonlyArray<T | null> | null } | null
+): T[] {
+  return frag?.nodes?.filter(nonNull) || [];
+}
+
 export function useStorage(name: string, storage?: Storage) {
   const [state, setState] = useState(storage?.getItem(name) || "");
   return [
