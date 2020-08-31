@@ -18,4 +18,4 @@ services:
       - ".:/app"
     environment:
       GITHUB_TOKEN: "${GITHUB_TOKEN}"
-    command: npm run gen -- --watch
+    command: npm run apollo:codegen -- --watch

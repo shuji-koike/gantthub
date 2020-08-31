@@ -6,7 +6,7 @@
     "build": "react-scripts build",
     "lint:prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json}'",
     "lint:eslint": "eslint",
-    "gen": "apollo client:codegen --target typescript --tsFileExtension d.ts --useReadOnlyTypes --outputFlat src/types --watch",
+    "apollo:codegen": "apollo client:codegen --target typescript --tsFileExtension d.ts --useReadOnlyTypes --outputFlat src/types --watch",
     "deploy": "firebase deploy"
   },
   "dependencies": {

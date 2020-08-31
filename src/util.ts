@@ -5,7 +5,7 @@ export function nonNull<T>(value: T | null): value is T {
 }
 
 export function nodes<T extends Object>(
-  frag: { nodes: ReadonlyArray<T | null> | null } | null
+  frag: { nodes: ReadonlyArray<T | null> | null } | null | undefined
 ): T[] {
   return frag?.nodes?.filter(nonNull) || [];
 }

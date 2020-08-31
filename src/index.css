@@ -12,6 +12,7 @@ main > header {
   top: 0;
   box-sizing: border-box;
   overflow: hidden;
+  z-index: 1100;
 }
 main > section {
   position: relative;
@@ -26,6 +27,9 @@ a {
 }
 a + span::before {
   content: " ";
+}
+p {
+  margin: 0.5rem 0;
 }
 th,
 td {
