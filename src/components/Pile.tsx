@@ -10,7 +10,7 @@ import {
 import { GithubItem, GithubItemFragment } from "./GithubItem";
 import { PagerMore, PagerUtil } from "./Pager";
 
-export const Pile: React.FC<{ data: UserPileFragment }> = function ({ data }) {
+export const Pile: React.FC<{ data: UserPileFragment }> = ({ data }) => {
   const { owner, name, login } = useParams<{
     owner?: string;
     name?: string;

@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { QueryRateLimit } from "../types/QueryRateLimit";
 
-export const RateLimit: React.FC = function ({ children }) {
+export const RateLimit: React.FC = ({ children }) => {
   const { data, loading, error } = useQuery<QueryRateLimit>(gql`
     query QueryRateLimit {
       rateLimit {

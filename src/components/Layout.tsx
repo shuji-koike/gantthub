@@ -1,15 +1,13 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import styled from "styled-components";
-import { Auth } from "./Auth";
 import "react-toastify/dist/ReactToastify.css";
+import { Header } from "./Header";
 
-export const Layout: React.FC = function ({ children }) {
+export const Layout: React.FC = ({ children }) => {
   return (
     <main>
-      <header>
-        <Auth />
-      </header>
+      <Header></Header>
       {children}
       <StyledToastContainer position="bottom-center" />
     </main>

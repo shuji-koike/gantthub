@@ -9,8 +9,11 @@ export const GithubLabel: React.FC<
   }
 > = ({ frag, ...props }) => {
   return (
-    <Label bg={`#${frag.color}`} {...props}>
-      {frag.name} ({frag.issues.totalCount || ""})
+    <Label
+      title={`${frag.name} (${frag.issues.totalCount}) \n${frag.description}`}
+      bg={`#${frag.color}`}
+      {...props}>
+      {frag.name}
     </Label>
   );
 };
@@ -20,8 +23,6 @@ export const GithubLabelFragment = gql`
     name
     description
     color
-    updatedAt
-    createdAt
     issues {
       totalCount
     }

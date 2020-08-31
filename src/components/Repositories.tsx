@@ -6,7 +6,7 @@ import { PagerMore } from "./Pager";
 
 export const Repositories: React.FC<{
   frag: RepositoriesFragmentConnection | null | undefined;
-}> = function ({ frag }) {
+}> = ({ frag }) => {
   if (!frag) return <>Loading...</>;
   return (
     <ul>

@@ -8,7 +8,7 @@ export interface ScrollBoxEvent {
 
 export const ScrollBox: React.FC<{
   onScroll?: (event: ScrollBoxEvent) => ScrollBoxEvent;
-}> = function ({ onScroll, children }) {
+}> = ({ onScroll, children }) => {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = ref.current;

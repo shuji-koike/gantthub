@@ -2,11 +2,7 @@ import React, { useCallback } from "react";
 
 type FormProps = React.FormHTMLAttributes<HTMLFormElement>;
 
-export const Form: React.FC<FormProps> = function ({
-  onSubmit,
-  children,
-  ...props
-}) {
+export const Form: React.FC<FormProps> = ({ onSubmit, children, ...props }) => {
   return (
     <form
       {...props}

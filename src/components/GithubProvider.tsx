@@ -16,7 +16,7 @@ const GithubContext = createContext({
 
 export const GithubProvider: React.FC<{
   fallback: React.ReactNode;
-}> = function ({ fallback, children }) {
+}> = ({ fallback, children }) => {
   const github = useContext(GithubContext);
   return (
     <GithubContext.Provider value={github}>
@@ -29,12 +29,12 @@ export const GithubProvider: React.FC<{
 
 export const GithubAuthProvider: React.FC<{
   fallback: React.ReactNode;
-}> = function ({ fallback, children }) {
+}> = ({ fallback, children }) => {
   const github = useContext(GithubContext);
   return <>{github.token ? children : fallback}</>;
 };
 
-export const GithubSchemaProvider: React.FC = function ({ children }) {
+export const GithubSchemaProvider: React.FC = ({ children }) => {
   const github = useContext(GithubContext);
   const [client, setClient] = useState<any>(null);
   useEffect(() => {

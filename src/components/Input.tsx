@@ -6,13 +6,13 @@ type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "name"> & {
   storage?: Storage;
 };
 
-export const Input: React.FC<InputProps> = function ({
+export const Input: React.FC<InputProps> = ({
   name,
   placeholder = name,
   onChange,
   storage,
   ...props
-}) {
+}) => {
   const [value, setValue] = useStorage(name, storage);
   return (
     <input
