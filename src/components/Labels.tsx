@@ -10,8 +10,7 @@ export const GithubLabel: React.FC<
 > = ({ frag, ...props }) => {
   return (
     <Label bg={`#${frag.color}`} {...props}>
-      {frag.name}
-      {frag.issues.totalCount || ""}
+      {frag.name} ({frag.issues.totalCount || ""})
     </Label>
   );
 };
