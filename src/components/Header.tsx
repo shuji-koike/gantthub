@@ -15,6 +15,7 @@ export const Header: React.FC = ({ children }) => {
 
 const StyledHeader = styled.header`
   display: flex;
+  padding: 4px 16px;
   align-items: center;
 
   > h1 {

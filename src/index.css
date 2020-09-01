@@ -11,7 +11,6 @@ main > header {
   position: sticky;
   top: 0;
   box-sizing: border-box;
-  overflow: hidden;
   z-index: 1100;
 }
 main > section {
@@ -42,4 +41,8 @@ th {
 }
 td {
   outline: 1px solid #ddd;
+}
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
 }

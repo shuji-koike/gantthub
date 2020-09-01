@@ -1,3 +1,4 @@
+import { Button as PrimerButton } from "@primer/components";
 import React from "react";
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -10,8 +11,8 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   return (
-    <button {...props} type={type}>
+    <PrimerButton {...props} type={type}>
       {label}
-    </button>
+    </PrimerButton>
   );
 };
